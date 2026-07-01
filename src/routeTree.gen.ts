@@ -9,8 +9,14 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as PlanovacRouteImport } from './routes/planovac'
 import { Route as IndexRouteImport } from './routes/index'
 
+const PlanovacRoute = PlanovacRouteImport.update({
+  id: '/planovac',
+  path: '/planovac',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +25,39 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/planovac': typeof PlanovacRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/planovac': typeof PlanovacRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/planovac': typeof PlanovacRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/planovac'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/planovac'
+  id: '__root__' | '/' | '/planovac'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  PlanovacRoute: typeof PlanovacRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/planovac': {
+      id: '/planovac'
+      path: '/planovac'
+      fullPath: '/planovac'
+      preLoaderRoute: typeof PlanovacRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,6 +70,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  PlanovacRoute: PlanovacRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
