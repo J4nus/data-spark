@@ -9,8 +9,44 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ZpravyRouteImport } from './routes/zpravy'
+import { Route as PlatformyRouteImport } from './routes/platformy'
+import { Route as PlanovacRouteImport } from './routes/planovac'
+import { Route as MediaRouteImport } from './routes/media'
+import { Route as DesignSystemRouteImport } from './routes/design-system'
+import { Route as ApiKliceRouteImport } from './routes/api-klice'
 import { Route as IndexRouteImport } from './routes/index'
 
+const ZpravyRoute = ZpravyRouteImport.update({
+  id: '/zpravy',
+  path: '/zpravy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlatformyRoute = PlatformyRouteImport.update({
+  id: '/platformy',
+  path: '/platformy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlanovacRoute = PlanovacRouteImport.update({
+  id: '/planovac',
+  path: '/planovac',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MediaRoute = MediaRouteImport.update({
+  id: '/media',
+  path: '/media',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DesignSystemRoute = DesignSystemRouteImport.update({
+  id: '/design-system',
+  path: '/design-system',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiKliceRoute = ApiKliceRouteImport.update({
+  id: '/api-klice',
+  path: '/api-klice',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +55,116 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/api-klice': typeof ApiKliceRoute
+  '/design-system': typeof DesignSystemRoute
+  '/media': typeof MediaRoute
+  '/planovac': typeof PlanovacRoute
+  '/platformy': typeof PlatformyRoute
+  '/zpravy': typeof ZpravyRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/api-klice': typeof ApiKliceRoute
+  '/design-system': typeof DesignSystemRoute
+  '/media': typeof MediaRoute
+  '/planovac': typeof PlanovacRoute
+  '/platformy': typeof PlatformyRoute
+  '/zpravy': typeof ZpravyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/api-klice': typeof ApiKliceRoute
+  '/design-system': typeof DesignSystemRoute
+  '/media': typeof MediaRoute
+  '/planovac': typeof PlanovacRoute
+  '/platformy': typeof PlatformyRoute
+  '/zpravy': typeof ZpravyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/api-klice'
+    | '/design-system'
+    | '/media'
+    | '/planovac'
+    | '/platformy'
+    | '/zpravy'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/api-klice'
+    | '/design-system'
+    | '/media'
+    | '/planovac'
+    | '/platformy'
+    | '/zpravy'
+  id:
+    | '__root__'
+    | '/'
+    | '/api-klice'
+    | '/design-system'
+    | '/media'
+    | '/planovac'
+    | '/platformy'
+    | '/zpravy'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ApiKliceRoute: typeof ApiKliceRoute
+  DesignSystemRoute: typeof DesignSystemRoute
+  MediaRoute: typeof MediaRoute
+  PlanovacRoute: typeof PlanovacRoute
+  PlatformyRoute: typeof PlatformyRoute
+  ZpravyRoute: typeof ZpravyRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/zpravy': {
+      id: '/zpravy'
+      path: '/zpravy'
+      fullPath: '/zpravy'
+      preLoaderRoute: typeof ZpravyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/platformy': {
+      id: '/platformy'
+      path: '/platformy'
+      fullPath: '/platformy'
+      preLoaderRoute: typeof PlatformyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/planovac': {
+      id: '/planovac'
+      path: '/planovac'
+      fullPath: '/planovac'
+      preLoaderRoute: typeof PlanovacRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/media': {
+      id: '/media'
+      path: '/media'
+      fullPath: '/media'
+      preLoaderRoute: typeof MediaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/design-system': {
+      id: '/design-system'
+      path: '/design-system'
+      fullPath: '/design-system'
+      preLoaderRoute: typeof DesignSystemRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api-klice': {
+      id: '/api-klice'
+      path: '/api-klice'
+      fullPath: '/api-klice'
+      preLoaderRoute: typeof ApiKliceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,17 +177,13 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ApiKliceRoute: ApiKliceRoute,
+  DesignSystemRoute: DesignSystemRoute,
+  MediaRoute: MediaRoute,
+  PlanovacRoute: PlanovacRoute,
+  PlatformyRoute: PlatformyRoute,
+  ZpravyRoute: ZpravyRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
