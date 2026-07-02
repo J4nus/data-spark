@@ -14,6 +14,7 @@ import { Route as PlatformyRouteImport } from './routes/platformy'
 import { Route as PlanovacRouteImport } from './routes/planovac'
 import { Route as MediaRouteImport } from './routes/media'
 import { Route as DesignSystemRouteImport } from './routes/design-system'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ApiKliceRouteImport } from './routes/api-klice'
 import { Route as IndexRouteImport } from './routes/index'
 
@@ -42,6 +43,11 @@ const DesignSystemRoute = DesignSystemRouteImport.update({
   path: '/design-system',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiKliceRoute = ApiKliceRouteImport.update({
   id: '/api-klice',
   path: '/api-klice',
@@ -56,6 +62,7 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/api-klice': typeof ApiKliceRoute
+  '/auth': typeof AuthRoute
   '/design-system': typeof DesignSystemRoute
   '/media': typeof MediaRoute
   '/planovac': typeof PlanovacRoute
@@ -65,6 +72,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/api-klice': typeof ApiKliceRoute
+  '/auth': typeof AuthRoute
   '/design-system': typeof DesignSystemRoute
   '/media': typeof MediaRoute
   '/planovac': typeof PlanovacRoute
@@ -75,6 +83,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/api-klice': typeof ApiKliceRoute
+  '/auth': typeof AuthRoute
   '/design-system': typeof DesignSystemRoute
   '/media': typeof MediaRoute
   '/planovac': typeof PlanovacRoute
@@ -86,6 +95,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/api-klice'
+    | '/auth'
     | '/design-system'
     | '/media'
     | '/planovac'
@@ -95,6 +105,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/api-klice'
+    | '/auth'
     | '/design-system'
     | '/media'
     | '/planovac'
@@ -104,6 +115,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/api-klice'
+    | '/auth'
     | '/design-system'
     | '/media'
     | '/planovac'
@@ -114,6 +126,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ApiKliceRoute: typeof ApiKliceRoute
+  AuthRoute: typeof AuthRoute
   DesignSystemRoute: typeof DesignSystemRoute
   MediaRoute: typeof MediaRoute
   PlanovacRoute: typeof PlanovacRoute
@@ -158,6 +171,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DesignSystemRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api-klice': {
       id: '/api-klice'
       path: '/api-klice'
@@ -178,6 +198,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ApiKliceRoute: ApiKliceRoute,
+  AuthRoute: AuthRoute,
   DesignSystemRoute: DesignSystemRoute,
   MediaRoute: MediaRoute,
   PlanovacRoute: PlanovacRoute,
@@ -187,13 +208,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

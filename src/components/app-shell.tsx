@@ -7,7 +7,7 @@ import {
   Plug,
   KeyRound,
   Palette,
-  Sparkles,
+  LogIn,
   Bell,
   Search,
 } from "lucide-react";
@@ -20,6 +20,7 @@ const nav = [
   { to: "/planovac", label: "Plánovač", icon: CalendarClock },
   { to: "/platformy", label: "Platformy", icon: Plug },
   { to: "/api-klice", label: "API klíče", icon: KeyRound },
+  { to: "/auth", label: "Přihlášení", icon: LogIn },
   { to: "/design-system", label: "Design System", icon: Palette },
 ] as const;
 
@@ -88,10 +89,10 @@ export function AppShell({
                 EM
               </div>
               <div className="min-w-0">
-                <p className="truncate text-sm font-semibold">Erotická Modelka</p>
+              <p className="truncate text-sm font-semibold">Content Studio</p>
                 <p className="flex items-center gap-1.5 text-[10px] text-muted-foreground">
                   <span className="size-1.5 rounded-full bg-neon-green" />
-                  AI Agent online
+                  Backend připraven
                 </p>
               </div>
             </div>
@@ -118,7 +119,7 @@ export function AppShell({
             />
           </div>
           <button className="grid size-9 shrink-0 place-items-center rounded-lg border border-border bg-surface text-muted-foreground hover:text-foreground">
-            <Sparkles className="size-4" />
+            <Bell className="size-4" />
           </button>
           {actions}
         </header>

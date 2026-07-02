@@ -11,17 +11,13 @@ export const Route = createFileRoute("/platformy")({
 const states: Record<PlatformKey, { connected: boolean; account?: string; followers?: string }> = {
   instagram: { connected: true, account: "@klara_dvorak", followers: "128,4k" },
   facebook: { connected: true, account: "Klára Dvořáková Official", followers: "42,1k" },
-  onlyfans: { connected: true, account: "klara_exclusive", followers: "3,8k" },
-  tiktok: { connected: true, account: "@klara_dvorak", followers: "87,2k" },
   youtube: { connected: false },
-  x: { connected: true, account: "@klara_d", followers: "12,4k" },
-  mail: { connected: true, account: "klara@studio.cz" },
-  rss: { connected: false },
+  manual: { connected: true, account: "Ruční zápisky", followers: "24" },
 };
 
 function PlatformsPage() {
   return (
-    <AppShell title="Propojené platformy" subtitle="Spravuj účty a oprávnění na jednom místě">
+    <AppShell title="Propojené platformy" subtitle="Instagram, Facebook a YouTube připravené pro OAuth napojení">
       <div className="grid grid-cols-2 gap-4 p-8">
         {(Object.keys(platforms) as PlatformKey[]).map((k) => {
           const p = platforms[k];
@@ -53,7 +49,7 @@ function PlatformsPage() {
                   {s.followers ? (
                     <p className="mt-2 text-xs">
                       <b className="font-display text-base">{s.followers}</b>{" "}
-                      <span className="text-muted-foreground">sledujících</span>
+                      <span className="text-muted-foreground">{k === "manual" ? "zápisků" : "sledujících"}</span>
                     </p>
                   ) : null}
                 </div>

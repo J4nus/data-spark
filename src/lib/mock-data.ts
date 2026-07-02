@@ -1,12 +1,8 @@
 export type PlatformKey =
   | "instagram"
   | "facebook"
-  | "onlyfans"
-  | "tiktok"
   | "youtube"
-  | "x"
-  | "mail"
-  | "rss";
+  | "manual";
 
 export const platforms: Record<
   PlatformKey,
@@ -14,19 +10,15 @@ export const platforms: Record<
 > = {
   instagram: { name: "Instagram", short: "IG", color: "text-ig", dot: "bg-ig" },
   facebook: { name: "Facebook", short: "FB", color: "text-fb", dot: "bg-fb" },
-  onlyfans: { name: "OnlyFans", short: "OF", color: "text-of", dot: "bg-of" },
-  tiktok: { name: "TikTok", short: "TT", color: "text-tt", dot: "bg-tt" },
   youtube: { name: "YouTube", short: "YT", color: "text-yt", dot: "bg-yt" },
-  x: { name: "X (Twitter)", short: "X", color: "text-x", dot: "bg-x" },
-  mail: { name: "E-mail", short: "@", color: "text-mail", dot: "bg-mail" },
-  rss: { name: "RSS", short: "RSS", color: "text-rss", dot: "bg-rss" },
+  manual: { name: "Ruční zápisky", short: "NO", color: "text-neon-amber", dot: "bg-neon-amber" },
 };
 
 export const kpis = [
-  { label: "OnlyFans tržby", value: "$14 250", delta: "+12,4 %", trend: "up" as const, platform: "onlyfans" },
   { label: "Instagram sledující", value: "128,4k", delta: "+842", trend: "up" as const, platform: "instagram" },
-  { label: "AI odpovědi (24h)", value: "1 420", delta: "+18 %", trend: "up" as const, platform: "mail" },
-  { label: "Aktivní sítě", value: "6 / 8", delta: "2 čekají", trend: "flat" as const, platform: "x" },
+  { label: "Facebook dosah", value: "42,1k", delta: "+8,2 %", trend: "up" as const, platform: "facebook" },
+  { label: "YouTube zhlédnutí", value: "18,6k", delta: "+1 240", trend: "up" as const, platform: "youtube" },
+  { label: "Ruční zápisky", value: "24", delta: "+5 tento týden", trend: "flat" as const, platform: "manual" },
 ];
 
 export const feedPosts = [
@@ -51,21 +43,21 @@ export const feedPosts = [
   },
   {
     id: "p3",
-    platform: "tiktok" as PlatformKey,
-    author: "@klara_dvorak",
+    platform: "youtube" as PlatformKey,
+    author: "ContentHub Studio",
     time: "včera",
-    text: "Zákulisí focení – rychlá sestřih • 47k zhlédnutí",
-    likes: 3200,
-    comments: 210,
+    text: "Nový vlog: jak připravujeme týdenní obsahový plán pro Meta a YouTube.",
+    likes: 920,
+    comments: 64,
   },
 ];
 
 export const inboxMessages = [
   {
     id: "m1",
-    platform: "onlyfans" as PlatformKey,
-    from: "Tomas_99",
-    preview: "Díky za ten poslední set, byl neuvěřitelný...",
+    platform: "instagram" as PlatformKey,
+    from: "@tomas_creative",
+    preview: "Můžeme domluvit collab na příští týden?",
     time: "14:20",
     unread: true,
   },
@@ -76,39 +68,37 @@ export const inboxMessages = [
     preview: "Dobrý den, poslal jsem vám zprávu na stránku...",
     time: "13:02",
     unread: true,
-    aiResolved: true,
   },
   {
     id: "m3",
     platform: "instagram" as PlatformKey,
     from: "@lucie.k",
-    preview: "Ahoj! Kdy bude další stream? 💕",
+    preview: "Ahoj! Kdy vyjde další reels série?",
     time: "12:44",
     unread: false,
   },
   {
     id: "m4",
-    platform: "mail" as PlatformKey,
-    from: "management@studio.cz",
-    preview: "Smlouva na březnovou kampaň – k podpisu",
+    platform: "youtube" as PlatformKey,
+    from: "Komentář u videa",
+    preview: "Můžeš udělat video o plánování obsahu?",
     time: "10:15",
     unread: true,
   },
   {
     id: "m5",
-    platform: "x" as PlatformKey,
-    from: "@brand_official",
-    preview: "Zaslali jsme vám návrh spolupráce, mrkněte na DM.",
+    platform: "manual" as PlatformKey,
+    from: "Ruční zápis",
+    preview: "Zapsat nápad na sérii: měsíční reporting kampaní.",
     time: "09:48",
     unread: false,
   },
 ];
 
 export const rssItems = [
-  { id: "r1", source: "Social Media Today", title: "Nové algoritmy na TikToku upřednostňují delší formát", time: "před 1h" },
-  { id: "r2", source: "TechCrunch", title: "OnlyFans mění platební podmínky pro tvůrce v EU", time: "před 3h" },
-  { id: "r3", source: "The Verge", title: "Instagram testuje AI filtry pro Reels", time: "dnes" },
-  { id: "r4", source: "Marketing Land", title: "X spouští video balíčky pro Premium účty", time: "včera" },
+  { id: "r1", source: "Meta", title: "Připravit OAuth flow pro Instagram a Facebook přes Meta Graph API", time: "backend" },
+  { id: "r2", source: "YouTube", title: "Připravit napojení YouTube účtu a základní synchronizaci kanálu", time: "backend" },
+  { id: "r3", source: "Poznámky", title: "Ruční zápisky zůstávají bez externí integrace", time: "model" },
 ];
 
 export const friends = [
@@ -121,9 +111,9 @@ export const friends = [
 
 export const scheduledPosts = [
   { id: "s1", title: "Reels – Tokyo Night Walk pt. 2", platform: "instagram" as PlatformKey, day: 4, hour: 19 },
-  { id: "s2", title: "Thread: Budoucnost AI ve vizuálu", platform: "x" as PlatformKey, day: 1, hour: 10 },
-  { id: "s3", title: "Exclusive drop", platform: "onlyfans" as PlatformKey, day: 3, hour: 21 },
-  { id: "s4", title: "TikTok BTS", platform: "tiktok" as PlatformKey, day: 5, hour: 18 },
+  { id: "s2", title: "Facebook Live Q&A", platform: "facebook" as PlatformKey, day: 2, hour: 20 },
+  { id: "s3", title: "Ruční zápis: nápady na kampaň", platform: "manual" as PlatformKey, day: 3, hour: 11 },
+  { id: "s4", title: "YouTube Shorts: BTS", platform: "youtube" as PlatformKey, day: 5, hour: 18 },
   { id: "s5", title: "YT Vlog: Studio tour", platform: "youtube" as PlatformKey, day: 6, hour: 15 },
   { id: "s6", title: "Facebook Live Q&A", platform: "facebook" as PlatformKey, day: 2, hour: 20 },
 ];

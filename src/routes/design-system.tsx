@@ -80,8 +80,8 @@ function DesignSystemPage() {
             <div>
               <p className="font-mono text-[10px] uppercase text-muted-foreground">Body · Inter</p>
               <p className="max-w-prose text-sm leading-relaxed">
-                Sjednocená schránka spojuje zprávy ze všech propojených sítí. AI navrhuje
-                odpovědi na základě tvého stylu a historie komunikace.
+                Sjednocená schránka spojuje zprávy z Instagramu, Facebooku a YouTube.
+                Ruční poznámky ukládají kontext bez externí integrace.
               </p>
             </div>
             <div>
@@ -161,13 +161,13 @@ function DesignSystemPage() {
           <div className="grid grid-cols-3 gap-4">
             <div className="rounded-2xl border border-border bg-card p-5">
               <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">KPI</p>
-              <p className="mt-2 font-display text-3xl font-semibold">$14 250</p>
-              <p className="mt-1 text-[11px] text-neon-green">+12,4 %</p>
+              <p className="mt-2 font-display text-3xl font-semibold">128,4k</p>
+              <p className="mt-1 text-[11px] text-neon-green">+842</p>
             </div>
             <div className="rounded-2xl border border-primary/50 bg-gradient-to-br from-primary/10 to-neon-violet/10 p-5">
               <p className="text-[10px] font-semibold uppercase tracking-widest text-primary">Featured</p>
-              <p className="mt-2 font-display text-lg">Nová funkce: AI Video Editor</p>
-              <p className="mt-2 text-xs text-muted-foreground">Přetvoř surové záběry na hotový Reel jedním kliknutím.</p>
+              <p className="mt-2 font-display text-lg">Meta + YouTube model</p>
+              <p className="mt-2 text-xs text-muted-foreground">Základ pro účty, média, příspěvky a ruční poznámky.</p>
             </div>
             <div className="rounded-2xl border border-dashed border-border p-5 text-center text-xs text-muted-foreground">
               <div className="mx-auto grid size-10 place-items-center rounded-full border border-border">+</div>
@@ -180,9 +180,9 @@ function DesignSystemPage() {
           <div className="space-y-3">
             {[
               { i: CheckCircle2, c: "text-neon-green", bg: "bg-neon-green/10 border-neon-green/30", t: "Účet Instagram byl úspěšně propojen." },
-              { i: Info, c: "text-neon-blue", bg: "bg-neon-blue/10 border-neon-blue/30", t: "AI asistent zpracoval 128 zpráv za posledních 24h." },
-              { i: AlertTriangle, c: "text-neon-amber", bg: "bg-neon-amber/10 border-neon-amber/30", t: "TikTok token vyprší za 3 dny – obnov jej v Platformách." },
-              { i: XCircle, c: "text-destructive", bg: "bg-destructive/10 border-destructive/30", t: "Publikace na X se nezdařila (rate limit)." },
+              { i: Info, c: "text-neon-blue", bg: "bg-neon-blue/10 border-neon-blue/30", t: "YouTube účet čeká na OAuth propojení." },
+              { i: AlertTriangle, c: "text-neon-amber", bg: "bg-neon-amber/10 border-neon-amber/30", t: "Meta token vyprší za 3 dny – obnov jej v Platformách." },
+              { i: XCircle, c: "text-destructive", bg: "bg-destructive/10 border-destructive/30", t: "Publikace na Facebook se nezdařila (rate limit)." },
             ].map((a, i) => (
               <div key={i} className={`flex items-start gap-3 rounded-xl border p-4 ${a.bg}`}>
                 <a.i className={`mt-0.5 size-4 shrink-0 ${a.c}`} />
@@ -202,7 +202,7 @@ function DesignSystemPage() {
                 {[
                   { t: "Tokyo Night Walk pt. 2", p: "instagram", s: "Publikováno", r: "42k" },
                   { t: "Studio Tour", p: "youtube", s: "Naplánováno", r: "—" },
-                  { t: "AI vs Human thread", p: "x", s: "Draft", r: "—" },
+                  { t: "Poznámky ke kampani", p: "manual", s: "Draft", r: "—" },
                 ].map((r, i) => {
                   const p = platforms[r.p as PlatformKey];
                   return (
