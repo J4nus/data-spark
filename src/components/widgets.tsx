@@ -14,7 +14,6 @@ import {
   Heart,
   MessageCircle,
   Calendar as CalendarIcon,
-  Sparkles,
   ChevronDown,
 } from "lucide-react";
 import {
@@ -48,7 +47,6 @@ export type WidgetKind =
   | "sticky-note"
   | "countdown"
   | "calendar-mini"
-  | "ai-queue"
   | "media-pool"
   | "engagement";
 
@@ -281,11 +279,7 @@ function InboxWidget({ platform }: { platform: PlatformKey }) {
               </div>
               <p className="truncate text-[11px] text-muted-foreground">„{m.preview}“</p>
             </div>
-            {m.aiResolved ? (
-              <span className="shrink-0 rounded-full bg-neon-green/15 px-2 py-0.5 text-[9px] font-bold uppercase text-neon-green">
-                Vyřešeno AI
-              </span>
-            ) : m.unread ? (
+            {m.unread ? (
               <span className="mt-1 size-2 shrink-0 rounded-full bg-primary" />
             ) : null}
           </div>
@@ -357,7 +351,7 @@ function StickyNoteWidget({ text }: { text?: string }) {
     >
       <StickyNote className="size-4 text-neon-amber" />
       <p className="font-display text-lg leading-tight text-pretty">
-        {text ?? "Nezapomenout: v pátek 18:00 poslat teaser na X před drop na OnlyFans."}
+        {text ?? "Nezapomenout: v pátek 18:00 připravit storyboard pro YouTube Shorts."}
       </p>
       <p className="text-[10px] uppercase tracking-widest text-neon-amber/70">Poznámka</p>
     </div>
@@ -435,41 +429,6 @@ function CalendarMiniWidget() {
   );
 }
 
-function AiQueueWidget() {
-  return (
-    <>
-      <WidgetHeader
-        icon={<Sparkles className="size-4 text-neon-violet" />}
-        title="AI fronta odpovědí"
-        meta={<span className="flex items-center gap-1 text-neon-green"><span className="size-1.5 animate-pulse rounded-full bg-neon-green" /> aktivní</span>}
-      />
-      <div className="flex-1 space-y-3 overflow-y-auto p-4">
-        {[
-          { from: "Martin K. (OF)", text: "Ahoj, bude dneska ten slibovaný set?", suggestion: "Ahoj Martine! Ano, dnes ve 21:00 posílám novinku, díky za trpělivost 💕" },
-          { from: "Alex (IG DM)", text: "Máš super fotky!", suggestion: "Moc díky za podporu, Alexi! 🖤" },
-        ].map((q, i) => (
-          <div key={i} className="rounded-lg border border-border/60 bg-surface p-3">
-            <p className="text-[11px] font-semibold text-muted-foreground">Zpráva od: {q.from}</p>
-            <p className="mt-1 text-xs italic text-muted-foreground">„{q.text}“</p>
-            <p className="mt-2 rounded-md bg-neon-violet/10 p-2 text-xs leading-snug text-pretty">
-              {q.suggestion}
-            </p>
-            <div className="mt-2 flex gap-2">
-              <button className="rounded-md bg-primary px-2.5 py-1 text-[10px] font-semibold text-primary-foreground">
-                Schválit
-              </button>
-              <button className="rounded-md border border-border px-2.5 py-1 text-[10px]">Upravit</button>
-              <button className="ml-auto text-[10px] text-muted-foreground hover:text-destructive">
-                Zamítnout
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
-    </>
-  );
-}
-
 function EngagementWidget() {
   return (
     <>
@@ -505,12 +464,11 @@ export const widgetCatalog: {
   { kind: "friend-feed", label: "Feed konkrétního přítele", desc: "Aktivita jednoho profilu", defaultSize: "2x1", icon: Users },
   { kind: "inbox", label: "Schránka platformy", desc: "Náhled DM z jedné sítě", defaultSize: "2x2", icon: Mail },
   { kind: "unified-inbox", label: "Sjednocená schránka", desc: "Všechny platformy dohromady", defaultSize: "2x2", icon: Mail },
-  { kind: "rss", label: "RSS feed", desc: "Externí web / blog", defaultSize: "2x1", icon: Rss },
-  { kind: "mail-preview", label: "Náhled e-mailu", desc: "IMAP schránka", defaultSize: "2x2", icon: Mail },
+  { kind: "rss", label: "Backend úkoly", desc: "Meta, YouTube a poznámky", defaultSize: "2x1", icon: Rss },
+  { kind: "mail-preview", label: "Ruční zápisky", desc: "Poznámky bez integrace", defaultSize: "2x2", icon: Mail },
   { kind: "sticky-note", label: "Poznámka", desc: "Volný text", defaultSize: "1x1", icon: StickyNote },
   { kind: "countdown", label: "Odpočet", desc: "Countdown s notifikací", defaultSize: "2x1", icon: Timer },
   { kind: "calendar-mini", label: "Mini kalendář", desc: "Přehled plánovaných postů", defaultSize: "2x3", icon: CalendarIcon },
-  { kind: "ai-queue", label: "AI fronta", desc: "Návrhy odpovědí k schválení", defaultSize: "2x2", icon: Sparkles },
   { kind: "media-pool", label: "Media Pool", desc: "Náhled knihovny mediálních souborů", defaultSize: "2x1", icon: ImageIcon },
   { kind: "engagement", label: "Engagement graf", desc: "Dosah / lajky v čase", defaultSize: "2x1", icon: TrendingUp },
 ];
@@ -522,7 +480,6 @@ export const defaultLayout: WidgetConfig[] = [
   { id: "w4", kind: "kpi", size: "1x1" },
   { id: "w5", kind: "platform-feed", size: "2x2", platform: "facebook" },
   { id: "w6", kind: "inbox", size: "2x2", platform: "facebook" },
-  { id: "w7", kind: "ai-queue", size: "2x2" },
   { id: "w8", kind: "friends-photos", size: "2x2" },
   { id: "w9", kind: "sticky-note", size: "1x1" },
   { id: "w10", kind: "countdown", size: "2x1" },
@@ -563,21 +520,19 @@ export function WidgetRenderer({
     case "friend-feed":
       return chrome(<FriendFeedWidget friendId={config.source} />);
     case "inbox":
-      return chrome(<InboxWidget platform={config.platform ?? "onlyfans"} />);
+      return chrome(<InboxWidget platform={config.platform ?? "instagram"} />);
     case "unified-inbox":
       return chrome(<UnifiedInboxWidget />);
     case "rss":
       return chrome(<RssWidget />);
     case "mail-preview":
-      return chrome(<InboxWidget platform="mail" />);
+      return chrome(<InboxWidget platform="manual" />);
     case "sticky-note":
       return chrome(<StickyNoteWidget text={config.note} />);
     case "countdown":
       return chrome(<CountdownWidget />);
     case "calendar-mini":
       return chrome(<CalendarMiniWidget />);
-    case "ai-queue":
-      return chrome(<AiQueueWidget />);
     case "media-pool":
       return chrome(<FriendsPhotosWidget />);
     case "engagement":

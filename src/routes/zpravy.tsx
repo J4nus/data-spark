@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { Send, Sparkles, Search } from "lucide-react";
+import { Send, StickyNote, Search } from "lucide-react";
 import { AppShell } from "@/components/app-shell";
 import { inboxMessages, platforms, type PlatformKey } from "@/lib/mock-data";
 
@@ -102,18 +102,18 @@ function MessagesPage() {
           </div>
         </div>
 
-        {/* AI panel */}
+        {/* Notes panel */}
         <aside className="flex flex-col border-l border-border bg-surface p-5">
           <div className="mb-4 flex items-center gap-2">
-            <Sparkles className="size-4 text-neon-violet" />
-            <p className="font-display text-sm font-semibold">AI asistent</p>
+            <StickyNote className="size-4 text-neon-amber" />
+            <p className="font-display text-sm font-semibold">Ruční poznámky</p>
           </div>
-          <p className="text-xs text-muted-foreground">Navrhované odpovědi na základě tvého stylu:</p>
+          <p className="text-xs text-muted-foreground">Rychlé poznámky ke konverzaci a budoucím příspěvkům:</p>
           <div className="mt-4 space-y-2">
             {[
-              "Ahoj! Moc díky za zprávu 💕 Dnes večer chystám novinku.",
-              "Ahoj, díky žes napsal! Za pár minut ti odpovím podrobněji.",
-              "Ahoj! Podívej se prosím na můj profil – najdeš tam vše.",
+              "Ověřit, jestli z toho vznikne Instagram collab.",
+              "Přidat téma do YouTube backlogu.",
+              "Navázat Facebook postem po publikaci reels.",
             ].map((t, i) => (
               <button key={i} className="w-full rounded-lg border border-border bg-background p-3 text-left text-xs leading-snug hover:border-primary">
                 {t}
@@ -122,11 +122,11 @@ function MessagesPage() {
           </div>
           <div className="mt-6 rounded-lg border border-border bg-background p-4">
             <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
-              Profil zákazníka
+              Kontext
             </p>
-            <p className="mt-2 text-xs">Fanoušek 4 měsíce · 12 nákupů · VIP</p>
+            <p className="mt-2 text-xs">Meta + YouTube · manuální zápisky</p>
             <p className="mt-1 text-[11px] text-muted-foreground">
-              Preferuje osobní tón, reaguje na emotikony.
+              AI návrhy odpovědí přijdou až v pozdější fázi.
             </p>
           </div>
         </aside>

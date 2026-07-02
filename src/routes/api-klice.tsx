@@ -9,10 +9,8 @@ export const Route = createFileRoute("/api-klice")({
 });
 
 const keys = [
-  { name: "OpenAI (AI odpovědi)", value: "sk-••••••••••••••••••••x9K2", created: "12. 3. 2026" },
   { name: "Meta Graph API", value: "EAA••••••••••••••••••••pQ4", created: "02. 2. 2026" },
-  { name: "OnlyFans Session", value: "of_••••••••••••••••••••8Fz", created: "28. 1. 2026" },
-  { name: "IMAP – studio.cz", value: "imap_••••••••••••••••hK1p", created: "14. 1. 2026" },
+  { name: "YouTube OAuth", value: "yt_••••••••••••••••••••hK1p", created: "14. 1. 2026" },
 ];
 
 function ApiKeysPage() {

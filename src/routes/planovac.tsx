@@ -107,12 +107,11 @@ function PlannerPage() {
 
           <div className="rounded-2xl border border-border bg-card p-5">
             <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
-              Doporučení AI
+              Doporučení plánu
             </p>
             <p className="mt-2 text-xs leading-relaxed text-pretty">
               Nejlepší čas pro post na <b className="text-primary">Instagram</b> je dnes{" "}
-              <b>20:00–21:30</b>. Publikum je nejaktivnější a algoritmus preferuje Reels s tématem
-              „backstage".
+              <b>20:00–21:30</b>. Navazuje na Facebook Q&A a páteční YouTube Shorts.
             </p>
             <button className="mt-3 w-full rounded-md border border-primary/40 bg-primary/10 px-3 py-1.5 text-[11px] font-semibold text-primary">
               Naplánovat na 20:15

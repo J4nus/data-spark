@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { Plus, Save, PencilRuler, LayoutGrid, Sparkles } from "lucide-react";
+import { Plus, Save, PencilRuler, LayoutGrid, Database } from "lucide-react";
 import { AppShell } from "@/components/app-shell";
 import {
   WidgetRenderer,
@@ -84,10 +84,10 @@ function DashboardPage() {
         </div>
 
         <p className="mt-8 flex items-center gap-2 text-[11px] text-muted-foreground">
-          <Sparkles className="size-3 text-neon-violet" />
+          <Database className="size-3 text-neon-violet" />
           Tip: klikni na <b className="text-foreground">Upravit rozložení</b>, potom můžeš dlaždice
-          přesouvat, měnit velikost (1×1 až 4×2) a konfigurovat zdroj – např. „feed konkrétního
-          přítele“ nebo „RSS z tvého blogu“.
+          přesouvat, měnit velikost (1×1 až 4×2) a konfigurovat zdroj – např. Instagram,
+          Facebook, YouTube nebo ruční zápisky.
         </p>
       </div>
 
