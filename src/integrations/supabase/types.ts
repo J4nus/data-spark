@@ -14,16 +14,283 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      connected_accounts: {
+        Row: {
+          account_handle: string | null
+          account_name: string
+          connected_at: string | null
+          created_at: string
+          expires_at: string | null
+          external_account_id: string | null
+          id: string
+          last_synced_at: string | null
+          metadata: Json
+          platform: Database["public"]["Enums"]["connected_platform"]
+          scopes: string[]
+          status: Database["public"]["Enums"]["account_status"]
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          account_handle?: string | null
+          account_name: string
+          connected_at?: string | null
+          created_at?: string
+          expires_at?: string | null
+          external_account_id?: string | null
+          id?: string
+          last_synced_at?: string | null
+          metadata?: Json
+          platform: Database["public"]["Enums"]["connected_platform"]
+          scopes?: string[]
+          status?: Database["public"]["Enums"]["account_status"]
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          account_handle?: string | null
+          account_name?: string
+          connected_at?: string | null
+          created_at?: string
+          expires_at?: string | null
+          external_account_id?: string | null
+          id?: string
+          last_synced_at?: string | null
+          metadata?: Json
+          platform?: Database["public"]["Enums"]["connected_platform"]
+          scopes?: string[]
+          status?: Database["public"]["Enums"]["account_status"]
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      content_items: {
+        Row: {
+          caption: string | null
+          connected_account_id: string | null
+          created_at: string
+          external_post_id: string | null
+          id: string
+          media_asset_id: string | null
+          metadata: Json
+          platform: Database["public"]["Enums"]["connected_platform"] | null
+          published_at: string | null
+          scheduled_for: string | null
+          status: Database["public"]["Enums"]["content_status"]
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          caption?: string | null
+          connected_account_id?: string | null
+          created_at?: string
+          external_post_id?: string | null
+          id?: string
+          media_asset_id?: string | null
+          metadata?: Json
+          platform?: Database["public"]["Enums"]["connected_platform"] | null
+          published_at?: string | null
+          scheduled_for?: string | null
+          status?: Database["public"]["Enums"]["content_status"]
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          caption?: string | null
+          connected_account_id?: string | null
+          created_at?: string
+          external_post_id?: string | null
+          id?: string
+          media_asset_id?: string | null
+          metadata?: Json
+          platform?: Database["public"]["Enums"]["connected_platform"] | null
+          published_at?: string | null
+          scheduled_for?: string | null
+          status?: Database["public"]["Enums"]["content_status"]
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "content_items_connected_account_id_fkey"
+            columns: ["connected_account_id"]
+            isOneToOne: false
+            referencedRelation: "connected_accounts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "content_items_media_asset_id_fkey"
+            columns: ["media_asset_id"]
+            isOneToOne: false
+            referencedRelation: "media_assets"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      manual_notes: {
+        Row: {
+          body: string | null
+          created_at: string
+          id: string
+          note_date: string
+          tags: string[]
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          body?: string | null
+          created_at?: string
+          id?: string
+          note_date?: string
+          tags?: string[]
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          body?: string | null
+          created_at?: string
+          id?: string
+          note_date?: string
+          tags?: string[]
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      media_assets: {
+        Row: {
+          created_at: string
+          duration_seconds: number | null
+          external_url: string | null
+          height: number | null
+          id: string
+          kind: Database["public"]["Enums"]["media_kind"]
+          metadata: Json
+          mime_type: string | null
+          size_bytes: number | null
+          storage_path: string | null
+          tags: string[]
+          title: string
+          updated_at: string
+          user_id: string
+          width: number | null
+        }
+        Insert: {
+          created_at?: string
+          duration_seconds?: number | null
+          external_url?: string | null
+          height?: number | null
+          id?: string
+          kind?: Database["public"]["Enums"]["media_kind"]
+          metadata?: Json
+          mime_type?: string | null
+          size_bytes?: number | null
+          storage_path?: string | null
+          tags?: string[]
+          title: string
+          updated_at?: string
+          user_id: string
+          width?: number | null
+        }
+        Update: {
+          created_at?: string
+          duration_seconds?: number | null
+          external_url?: string | null
+          height?: number | null
+          id?: string
+          kind?: Database["public"]["Enums"]["media_kind"]
+          metadata?: Json
+          mime_type?: string | null
+          size_bytes?: number | null
+          storage_path?: string | null
+          tags?: string[]
+          title?: string
+          updated_at?: string
+          user_id?: string
+          width?: number | null
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          display_name: string | null
+          handle: string | null
+          id: string
+          language: string
+          timezone: string
+          updated_at: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name?: string | null
+          handle?: string | null
+          id: string
+          language?: string
+          timezone?: string
+          updated_at?: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name?: string | null
+          handle?: string | null
+          id?: string
+          language?: string
+          timezone?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      account_status: "draft" | "connected" | "expired" | "revoked" | "error"
+      app_role: "admin" | "user"
+      connected_platform: "instagram" | "facebook" | "youtube"
+      content_status: "idea" | "draft" | "scheduled" | "published" | "archived"
+      media_kind: "image" | "video" | "audio" | "document" | "other"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +417,12 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      account_status: ["draft", "connected", "expired", "revoked", "error"],
+      app_role: ["admin", "user"],
+      connected_platform: ["instagram", "facebook", "youtube"],
+      content_status: ["idea", "draft", "scheduled", "published", "archived"],
+      media_kind: ["image", "video", "audio", "document", "other"],
+    },
   },
 } as const
