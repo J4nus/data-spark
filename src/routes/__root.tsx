@@ -76,16 +76,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "ContentHub – Centrální správa obsahu napříč sítěmi" },
+      { title: "ContentHub – Meta a YouTube plánovač obsahu" },
       {
         name: "description",
         content:
-          "Jedna nástěnka pro Instagram, Facebook, OnlyFans, TikTok, YouTube, X, mail a RSS. Konfigurovatelné feedy, plánovač, AI odpovědi.",
+          "Backend a plánovač obsahu pro Instagram, Facebook a YouTube s ručními poznámkami a bezpečným přihlášením.",
       },
-      { property: "og:title", content: "ContentHub – Studio Suite" },
+      { property: "og:title", content: "ContentHub – Meta a YouTube" },
       {
         property: "og:description",
-        content: "Centrální nástěnka pro tvůrce obsahu na všech platformách.",
+        content: "Správa obsahu, médií a poznámek pro Instagram, Facebook a YouTube.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
