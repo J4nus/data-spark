@@ -82,13 +82,19 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content:
           "Backend a plánovač obsahu pro Instagram, Facebook a YouTube s ručními poznámkami a bezpečným přihlášením.",
       },
-      { property: "og:title", content: "ContentHub – Meta a YouTube" },
+      { property: "og:title", content: "ContentHub – Meta a YouTube plánovač obsahu" },
       {
         property: "og:description",
         content: "Správa obsahu, médií a poznámek pro Instagram, Facebook a YouTube.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "ContentHub – Meta a YouTube plánovač obsahu" },
+      { name: "description", content: "Data Spark is a data visualization and analysis tool." },
+      { property: "og:description", content: "Data Spark is a data visualization and analysis tool." },
+      { name: "twitter:description", content: "Data Spark is a data visualization and analysis tool." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/e9cb2168-3219-41ed-a764-814b1c736f67/id-preview-dd1559ff--c6312ab5-6ec1-44eb-a273-4081ce14f906.lovable.app-1782999341634.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/e9cb2168-3219-41ed-a764-814b1c736f67/id-preview-dd1559ff--c6312ab5-6ec1-44eb-a273-4081ce14f906.lovable.app-1782999341634.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
