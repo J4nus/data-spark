@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
 import { Route as AuthenticatedZpravyRouteImport } from './routes/_authenticated/zpravy'
 import { Route as AuthenticatedPlatformyRouteImport } from './routes/_authenticated/platformy'
@@ -23,44 +24,49 @@ const AuthRoute = AuthRouteImport.update({
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
-  id: '/_authenticated/',
-  path: '/',
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedZpravyRoute = AuthenticatedZpravyRouteImport.update({
-  id: '/_authenticated/zpravy',
+  id: '/zpravy',
   path: '/zpravy',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedPlatformyRoute = AuthenticatedPlatformyRouteImport.update({
-  id: '/_authenticated/platformy',
+  id: '/platformy',
   path: '/platformy',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedPlanovacRoute = AuthenticatedPlanovacRouteImport.update({
-  id: '/_authenticated/planovac',
+  id: '/planovac',
   path: '/planovac',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedMediaRoute = AuthenticatedMediaRouteImport.update({
-  id: '/_authenticated/media',
+  id: '/media',
   path: '/media',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedDesignSystemRoute =
   AuthenticatedDesignSystemRouteImport.update({
-    id: '/_authenticated/design-system',
+    id: '/design-system',
     path: '/design-system',
-    getParentRoute: () => rootRouteImport,
+    getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedApiKliceRoute = AuthenticatedApiKliceRouteImport.update({
-  id: '/_authenticated/api-klice',
+  id: '/api-klice',
   path: '/api-klice',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
+  '/': typeof AuthenticatedIndexRoute
   '/auth': typeof AuthRoute
   '/api-klice': typeof AuthenticatedApiKliceRoute
   '/design-system': typeof AuthenticatedDesignSystemRoute
@@ -68,7 +74,6 @@ export interface FileRoutesByFullPath {
   '/planovac': typeof AuthenticatedPlanovacRoute
   '/platformy': typeof AuthenticatedPlatformyRoute
   '/zpravy': typeof AuthenticatedZpravyRoute
-  '/': typeof AuthenticatedIndexRoute
 }
 export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
@@ -82,6 +87,7 @@ export interface FileRoutesByTo {
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/_authenticated/api-klice': typeof AuthenticatedApiKliceRoute
   '/_authenticated/design-system': typeof AuthenticatedDesignSystemRoute
@@ -94,6 +100,7 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
+    | '/'
     | '/auth'
     | '/api-klice'
     | '/design-system'
@@ -101,7 +108,6 @@ export interface FileRouteTypes {
     | '/planovac'
     | '/platformy'
     | '/zpravy'
-    | '/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/auth'
@@ -114,6 +120,7 @@ export interface FileRouteTypes {
     | '/'
   id:
     | '__root__'
+    | '/_authenticated'
     | '/auth'
     | '/_authenticated/api-klice'
     | '/_authenticated/design-system'
@@ -125,14 +132,8 @@ export interface FileRouteTypes {
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
-  AuthenticatedApiKliceRoute: typeof AuthenticatedApiKliceRoute
-  AuthenticatedDesignSystemRoute: typeof AuthenticatedDesignSystemRoute
-  AuthenticatedMediaRoute: typeof AuthenticatedMediaRoute
-  AuthenticatedPlanovacRoute: typeof AuthenticatedPlanovacRoute
-  AuthenticatedPlatformyRoute: typeof AuthenticatedPlatformyRoute
-  AuthenticatedZpravyRoute: typeof AuthenticatedZpravyRoute
-  AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -144,60 +145,76 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_authenticated/': {
       id: '/_authenticated/'
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof AuthenticatedIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/zpravy': {
       id: '/_authenticated/zpravy'
       path: '/zpravy'
       fullPath: '/zpravy'
       preLoaderRoute: typeof AuthenticatedZpravyRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/platformy': {
       id: '/_authenticated/platformy'
       path: '/platformy'
       fullPath: '/platformy'
       preLoaderRoute: typeof AuthenticatedPlatformyRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/planovac': {
       id: '/_authenticated/planovac'
       path: '/planovac'
       fullPath: '/planovac'
       preLoaderRoute: typeof AuthenticatedPlanovacRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/media': {
       id: '/_authenticated/media'
       path: '/media'
       fullPath: '/media'
       preLoaderRoute: typeof AuthenticatedMediaRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/design-system': {
       id: '/_authenticated/design-system'
       path: '/design-system'
       fullPath: '/design-system'
       preLoaderRoute: typeof AuthenticatedDesignSystemRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/api-klice': {
       id: '/_authenticated/api-klice'
       path: '/api-klice'
       fullPath: '/api-klice'
       preLoaderRoute: typeof AuthenticatedApiKliceRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
   }
 }
 
-const rootRouteChildren: RootRouteChildren = {
-  AuthRoute: AuthRoute,
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedApiKliceRoute: typeof AuthenticatedApiKliceRoute
+  AuthenticatedDesignSystemRoute: typeof AuthenticatedDesignSystemRoute
+  AuthenticatedMediaRoute: typeof AuthenticatedMediaRoute
+  AuthenticatedPlanovacRoute: typeof AuthenticatedPlanovacRoute
+  AuthenticatedPlatformyRoute: typeof AuthenticatedPlatformyRoute
+  AuthenticatedZpravyRoute: typeof AuthenticatedZpravyRoute
+  AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedApiKliceRoute: AuthenticatedApiKliceRoute,
   AuthenticatedDesignSystemRoute: AuthenticatedDesignSystemRoute,
   AuthenticatedMediaRoute: AuthenticatedMediaRoute,
@@ -205,6 +222,14 @@ const rootRouteChildren: RootRouteChildren = {
   AuthenticatedPlatformyRoute: AuthenticatedPlatformyRoute,
   AuthenticatedZpravyRoute: AuthenticatedZpravyRoute,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
+const rootRouteChildren: RootRouteChildren = {
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
