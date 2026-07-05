@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Upload, Filter, Grid3x3 } from "lucide-react";
 import { AppShell } from "@/components/app-shell";
 
-export const Route = createFileRoute("/media")({
+export const Route = createFileRoute("/_authenticated/media")({
   head: () => ({ meta: [{ title: "Media Pool – ContentHub" }] }),
   component: MediaPage,
 });

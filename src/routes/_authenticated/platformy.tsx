@@ -3,7 +3,7 @@ import { AppShell } from "@/components/app-shell";
 import { platforms, type PlatformKey } from "@/lib/mock-data";
 import { CheckCircle2, XCircle } from "lucide-react";
 
-export const Route = createFileRoute("/platformy")({
+export const Route = createFileRoute("/_authenticated/platformy")({
   head: () => ({ meta: [{ title: "Platformy – ContentHub" }] }),
   component: PlatformsPage,
 });

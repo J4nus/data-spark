@@ -4,7 +4,7 @@ import { Send, StickyNote, Search } from "lucide-react";
 import { AppShell } from "@/components/app-shell";
 import { inboxMessages, platforms, type PlatformKey } from "@/lib/mock-data";
 
-export const Route = createFileRoute("/zpravy")({
+export const Route = createFileRoute("/_authenticated/zpravy")({
   head: () => ({ meta: [{ title: "Zprávy – ContentHub" }] }),
   component: MessagesPage,
 });

@@ -11,7 +11,7 @@ import {
   type PlatformKey,
 } from "@/lib/mock-data";
 
-export const Route = createFileRoute("/planovac")({
+export const Route = createFileRoute("/_authenticated/planovac")({
   head: () => ({
     meta: [
       { title: "Plánovač publikací – ContentHub" },

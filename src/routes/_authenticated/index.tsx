@@ -13,7 +13,7 @@ import {
 import { platforms, type PlatformKey } from "@/lib/mock-data";
 import { toast } from "sonner";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/_authenticated/")({
   component: DashboardPage,
 });
 

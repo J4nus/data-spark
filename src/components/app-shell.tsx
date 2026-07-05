@@ -1,4 +1,4 @@
-import { Link, useRouterState } from "@tanstack/react-router";
+import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import {
   LayoutDashboard,
   MessageSquare,
@@ -7,11 +7,14 @@ import {
   Plug,
   KeyRound,
   Palette,
-  LogIn,
+  LogOut,
   Bell,
   Search,
 } from "lucide-react";
-import type { ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 
 const nav = [
   { to: "/", label: "Nástěnka", icon: LayoutDashboard },
@@ -20,7 +23,6 @@ const nav = [
   { to: "/planovac", label: "Plánovač", icon: CalendarClock },
   { to: "/platformy", label: "Platformy", icon: Plug },
   { to: "/api-klice", label: "API klíče", icon: KeyRound },
-  { to: "/auth", label: "Přihlášení", icon: LogIn },
   { to: "/design-system", label: "Design System", icon: Palette },
 ] as const;
 
@@ -36,6 +38,25 @@ export function AppShell({
   children: ReactNode;
 }) {
   const pathname = useRouterState({ select: (r) => r.location.pathname });
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const [email, setEmail] = useState<string | null>(null);
+
+  useEffect(() => {
+    void supabase.auth.getUser().then(({ data }) => setEmail(data.user?.email ?? null));
+    const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => {
+      setEmail(session?.user?.email ?? null);
+    });
+    return () => sub.subscription.unsubscribe();
+  }, []);
+
+  async function handleSignOut() {
+    await queryClient.cancelQueries();
+    queryClient.clear();
+    await supabase.auth.signOut();
+    toast.success("Odhlášeno");
+    await navigate({ to: "/auth", replace: true });
+  }
 
   return (
     <div className="flex min-h-screen bg-background text-foreground">
@@ -86,15 +107,22 @@ export function AppShell({
           <div className="rounded-xl border border-sidebar-border bg-surface-2/60 p-3">
             <div className="flex items-center gap-3">
               <div className="grid size-9 shrink-0 place-items-center rounded-full bg-gradient-to-br from-primary to-neon-violet font-display text-xs font-bold text-primary-foreground">
-                EM
+                {email ? email.slice(0, 2).toUpperCase() : "CH"}
               </div>
-              <div className="min-w-0">
-              <p className="truncate text-sm font-semibold">Content Studio</p>
+              <div className="min-w-0 flex-1">
+                <p className="truncate text-sm font-semibold">{email ?? "Content Studio"}</p>
                 <p className="flex items-center gap-1.5 text-[10px] text-muted-foreground">
                   <span className="size-1.5 rounded-full bg-neon-green" />
-                  Backend připraven
+                  Přihlášen
                 </p>
               </div>
+              <button
+                onClick={handleSignOut}
+                title="Odhlásit se"
+                className="grid size-7 shrink-0 place-items-center rounded-md text-muted-foreground hover:bg-sidebar-accent hover:text-foreground"
+              >
+                <LogOut className="size-4" />
+              </button>
             </div>
           </div>
         </div>
