@@ -9,168 +9,134 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as ZpravyRouteImport } from './routes/zpravy'
-import { Route as PlatformyRouteImport } from './routes/platformy'
-import { Route as PlanovacRouteImport } from './routes/planovac'
-import { Route as MediaRouteImport } from './routes/media'
-import { Route as DesignSystemRouteImport } from './routes/design-system'
 import { Route as AuthRouteImport } from './routes/auth'
-import { Route as ApiKliceRouteImport } from './routes/api-klice'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
+import { Route as AuthenticatedZpravyRouteImport } from './routes/_authenticated/zpravy'
+import { Route as AuthenticatedPlatformyRouteImport } from './routes/_authenticated/platformy'
+import { Route as AuthenticatedPlanovacRouteImport } from './routes/_authenticated/planovac'
+import { Route as AuthenticatedMediaRouteImport } from './routes/_authenticated/media'
+import { Route as AuthenticatedDesignSystemRouteImport } from './routes/_authenticated/design-system'
+import { Route as AuthenticatedApiKliceRouteImport } from './routes/_authenticated/api-klice'
 
-const ZpravyRoute = ZpravyRouteImport.update({
-  id: '/zpravy',
-  path: '/zpravy',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PlatformyRoute = PlatformyRouteImport.update({
-  id: '/platformy',
-  path: '/platformy',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PlanovacRoute = PlanovacRouteImport.update({
-  id: '/planovac',
-  path: '/planovac',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MediaRoute = MediaRouteImport.update({
-  id: '/media',
-  path: '/media',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DesignSystemRoute = DesignSystemRouteImport.update({
-  id: '/design-system',
-  path: '/design-system',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiKliceRoute = ApiKliceRouteImport.update({
-  id: '/api-klice',
-  path: '/api-klice',
+const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
+  id: '/_authenticated/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const AuthenticatedZpravyRoute = AuthenticatedZpravyRouteImport.update({
+  id: '/_authenticated/zpravy',
+  path: '/zpravy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedPlatformyRoute = AuthenticatedPlatformyRouteImport.update({
+  id: '/_authenticated/platformy',
+  path: '/platformy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedPlanovacRoute = AuthenticatedPlanovacRouteImport.update({
+  id: '/_authenticated/planovac',
+  path: '/planovac',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedMediaRoute = AuthenticatedMediaRouteImport.update({
+  id: '/_authenticated/media',
+  path: '/media',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedDesignSystemRoute =
+  AuthenticatedDesignSystemRouteImport.update({
+    id: '/_authenticated/design-system',
+    path: '/design-system',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const AuthenticatedApiKliceRoute = AuthenticatedApiKliceRouteImport.update({
+  id: '/_authenticated/api-klice',
+  path: '/api-klice',
   getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/api-klice': typeof ApiKliceRoute
   '/auth': typeof AuthRoute
-  '/design-system': typeof DesignSystemRoute
-  '/media': typeof MediaRoute
-  '/planovac': typeof PlanovacRoute
-  '/platformy': typeof PlatformyRoute
-  '/zpravy': typeof ZpravyRoute
+  '/api-klice': typeof AuthenticatedApiKliceRoute
+  '/design-system': typeof AuthenticatedDesignSystemRoute
+  '/media': typeof AuthenticatedMediaRoute
+  '/planovac': typeof AuthenticatedPlanovacRoute
+  '/platformy': typeof AuthenticatedPlatformyRoute
+  '/zpravy': typeof AuthenticatedZpravyRoute
+  '/': typeof AuthenticatedIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/api-klice': typeof ApiKliceRoute
   '/auth': typeof AuthRoute
-  '/design-system': typeof DesignSystemRoute
-  '/media': typeof MediaRoute
-  '/planovac': typeof PlanovacRoute
-  '/platformy': typeof PlatformyRoute
-  '/zpravy': typeof ZpravyRoute
+  '/api-klice': typeof AuthenticatedApiKliceRoute
+  '/design-system': typeof AuthenticatedDesignSystemRoute
+  '/media': typeof AuthenticatedMediaRoute
+  '/planovac': typeof AuthenticatedPlanovacRoute
+  '/platformy': typeof AuthenticatedPlatformyRoute
+  '/zpravy': typeof AuthenticatedZpravyRoute
+  '/': typeof AuthenticatedIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/api-klice': typeof ApiKliceRoute
   '/auth': typeof AuthRoute
-  '/design-system': typeof DesignSystemRoute
-  '/media': typeof MediaRoute
-  '/planovac': typeof PlanovacRoute
-  '/platformy': typeof PlatformyRoute
-  '/zpravy': typeof ZpravyRoute
+  '/_authenticated/api-klice': typeof AuthenticatedApiKliceRoute
+  '/_authenticated/design-system': typeof AuthenticatedDesignSystemRoute
+  '/_authenticated/media': typeof AuthenticatedMediaRoute
+  '/_authenticated/planovac': typeof AuthenticatedPlanovacRoute
+  '/_authenticated/platformy': typeof AuthenticatedPlatformyRoute
+  '/_authenticated/zpravy': typeof AuthenticatedZpravyRoute
+  '/_authenticated/': typeof AuthenticatedIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/'
-    | '/api-klice'
     | '/auth'
+    | '/api-klice'
     | '/design-system'
     | '/media'
     | '/planovac'
     | '/platformy'
     | '/zpravy'
+    | '/'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
-    | '/api-klice'
     | '/auth'
+    | '/api-klice'
     | '/design-system'
     | '/media'
     | '/planovac'
     | '/platformy'
     | '/zpravy'
+    | '/'
   id:
     | '__root__'
-    | '/'
-    | '/api-klice'
     | '/auth'
-    | '/design-system'
-    | '/media'
-    | '/planovac'
-    | '/platformy'
-    | '/zpravy'
+    | '/_authenticated/api-klice'
+    | '/_authenticated/design-system'
+    | '/_authenticated/media'
+    | '/_authenticated/planovac'
+    | '/_authenticated/platformy'
+    | '/_authenticated/zpravy'
+    | '/_authenticated/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  ApiKliceRoute: typeof ApiKliceRoute
   AuthRoute: typeof AuthRoute
-  DesignSystemRoute: typeof DesignSystemRoute
-  MediaRoute: typeof MediaRoute
-  PlanovacRoute: typeof PlanovacRoute
-  PlatformyRoute: typeof PlatformyRoute
-  ZpravyRoute: typeof ZpravyRoute
+  AuthenticatedApiKliceRoute: typeof AuthenticatedApiKliceRoute
+  AuthenticatedDesignSystemRoute: typeof AuthenticatedDesignSystemRoute
+  AuthenticatedMediaRoute: typeof AuthenticatedMediaRoute
+  AuthenticatedPlanovacRoute: typeof AuthenticatedPlanovacRoute
+  AuthenticatedPlatformyRoute: typeof AuthenticatedPlatformyRoute
+  AuthenticatedZpravyRoute: typeof AuthenticatedZpravyRoute
+  AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/zpravy': {
-      id: '/zpravy'
-      path: '/zpravy'
-      fullPath: '/zpravy'
-      preLoaderRoute: typeof ZpravyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/platformy': {
-      id: '/platformy'
-      path: '/platformy'
-      fullPath: '/platformy'
-      preLoaderRoute: typeof PlatformyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/planovac': {
-      id: '/planovac'
-      path: '/planovac'
-      fullPath: '/planovac'
-      preLoaderRoute: typeof PlanovacRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/media': {
-      id: '/media'
-      path: '/media'
-      fullPath: '/media'
-      preLoaderRoute: typeof MediaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/design-system': {
-      id: '/design-system'
-      path: '/design-system'
-      fullPath: '/design-system'
-      preLoaderRoute: typeof DesignSystemRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/auth': {
       id: '/auth'
       path: '/auth'
@@ -178,32 +144,67 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api-klice': {
-      id: '/api-klice'
-      path: '/api-klice'
-      fullPath: '/api-klice'
-      preLoaderRoute: typeof ApiKliceRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/': {
-      id: '/'
+    '/_authenticated/': {
+      id: '/_authenticated/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+      preLoaderRoute: typeof AuthenticatedIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/zpravy': {
+      id: '/_authenticated/zpravy'
+      path: '/zpravy'
+      fullPath: '/zpravy'
+      preLoaderRoute: typeof AuthenticatedZpravyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/platformy': {
+      id: '/_authenticated/platformy'
+      path: '/platformy'
+      fullPath: '/platformy'
+      preLoaderRoute: typeof AuthenticatedPlatformyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/planovac': {
+      id: '/_authenticated/planovac'
+      path: '/planovac'
+      fullPath: '/planovac'
+      preLoaderRoute: typeof AuthenticatedPlanovacRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/media': {
+      id: '/_authenticated/media'
+      path: '/media'
+      fullPath: '/media'
+      preLoaderRoute: typeof AuthenticatedMediaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/design-system': {
+      id: '/_authenticated/design-system'
+      path: '/design-system'
+      fullPath: '/design-system'
+      preLoaderRoute: typeof AuthenticatedDesignSystemRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/api-klice': {
+      id: '/_authenticated/api-klice'
+      path: '/api-klice'
+      fullPath: '/api-klice'
+      preLoaderRoute: typeof AuthenticatedApiKliceRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  ApiKliceRoute: ApiKliceRoute,
   AuthRoute: AuthRoute,
-  DesignSystemRoute: DesignSystemRoute,
-  MediaRoute: MediaRoute,
-  PlanovacRoute: PlanovacRoute,
-  PlatformyRoute: PlatformyRoute,
-  ZpravyRoute: ZpravyRoute,
+  AuthenticatedApiKliceRoute: AuthenticatedApiKliceRoute,
+  AuthenticatedDesignSystemRoute: AuthenticatedDesignSystemRoute,
+  AuthenticatedMediaRoute: AuthenticatedMediaRoute,
+  AuthenticatedPlanovacRoute: AuthenticatedPlanovacRoute,
+  AuthenticatedPlatformyRoute: AuthenticatedPlatformyRoute,
+  AuthenticatedZpravyRoute: AuthenticatedZpravyRoute,
+  AuthenticatedIndexRoute: AuthenticatedIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

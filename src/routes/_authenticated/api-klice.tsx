@@ -3,7 +3,7 @@ import { AppShell } from "@/components/app-shell";
 import { Eye, EyeOff, Copy, Plus } from "lucide-react";
 import { useState } from "react";
 
-export const Route = createFileRoute("/api-klice")({
+export const Route = createFileRoute("/_authenticated/api-klice")({
   head: () => ({ meta: [{ title: "API klíče – ContentHub" }] }),
   component: ApiKeysPage,
 });

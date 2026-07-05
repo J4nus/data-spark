@@ -3,7 +3,7 @@ import { AppShell } from "@/components/app-shell";
 import { platforms, type PlatformKey } from "@/lib/mock-data";
 import { CheckCircle2, AlertTriangle, Info, XCircle } from "lucide-react";
 
-export const Route = createFileRoute("/design-system")({
+export const Route = createFileRoute("/_authenticated/design-system")({
   head: () => ({ meta: [{ title: "Design System – ContentHub" }] }),
   component: DesignSystemPage,
 });
