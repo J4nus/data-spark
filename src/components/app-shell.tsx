@@ -1,4 +1,4 @@
-import { Link, useRouterState } from "@tanstack/react-router";
+import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import {
   LayoutDashboard,
   MessageSquare,
@@ -7,11 +7,14 @@ import {
   Plug,
   KeyRound,
   Palette,
-  LogIn,
+  LogOut,
   Bell,
   Search,
 } from "lucide-react";
-import type { ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 
 const nav = [
   { to: "/", label: "Nástěnka", icon: LayoutDashboard },
@@ -20,7 +23,6 @@ const nav = [
   { to: "/planovac", label: "Plánovač", icon: CalendarClock },
   { to: "/platformy", label: "Platformy", icon: Plug },
   { to: "/api-klice", label: "API klíče", icon: KeyRound },
-  { to: "/auth", label: "Přihlášení", icon: LogIn },
   { to: "/design-system", label: "Design System", icon: Palette },
 ] as const;
 
