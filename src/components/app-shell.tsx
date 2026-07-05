@@ -107,15 +107,22 @@ export function AppShell({
           <div className="rounded-xl border border-sidebar-border bg-surface-2/60 p-3">
             <div className="flex items-center gap-3">
               <div className="grid size-9 shrink-0 place-items-center rounded-full bg-gradient-to-br from-primary to-neon-violet font-display text-xs font-bold text-primary-foreground">
-                EM
+                {email ? email.slice(0, 2).toUpperCase() : "CH"}
               </div>
-              <div className="min-w-0">
-              <p className="truncate text-sm font-semibold">Content Studio</p>
+              <div className="min-w-0 flex-1">
+                <p className="truncate text-sm font-semibold">{email ?? "Content Studio"}</p>
                 <p className="flex items-center gap-1.5 text-[10px] text-muted-foreground">
                   <span className="size-1.5 rounded-full bg-neon-green" />
-                  Backend připraven
+                  Přihlášen
                 </p>
               </div>
+              <button
+                onClick={handleSignOut}
+                title="Odhlásit se"
+                className="grid size-7 shrink-0 place-items-center rounded-md text-muted-foreground hover:bg-sidebar-accent hover:text-foreground"
+              >
+                <LogOut className="size-4" />
+              </button>
             </div>
           </div>
         </div>
